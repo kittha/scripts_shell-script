@@ -6,7 +6,7 @@
 # input project name
 # and this script will create vite react app template for you
 
-echo 'Enter your project name' && read projactname && npm create vite@latest ${projectname} -- --template react &&
+echo 'Enter your project name' && read projectname && npm create vite@latest ${projectname} -- --template react &&
 cd ${projectname} &&
 npm install &&
 npm run dev
