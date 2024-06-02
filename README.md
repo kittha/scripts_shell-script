@@ -33,5 +33,5 @@
 ### How to use (in Bash or POSIX Compliant Shells)
 - in bash terminal type command `chmod u+x viteReactJsSetupScript.sh`
 - right click file then click "Run as a program"
-- program will open terminal -> ask for project name -> then setup automatically.
+- program will open terminal -> ask for project name (use only lower-case char or kebab case name) -> then script will setup automatically.
 ---
