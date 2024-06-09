@@ -1,4 +1,4 @@
-# shell script
+# my shell script
 ---
 
 ## "gh_cleaning-remote-repo-script.sh"
