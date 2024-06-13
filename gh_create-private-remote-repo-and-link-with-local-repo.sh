@@ -37,8 +37,6 @@ if [ ! -d .git ]; then
     git init
 else
     echo "this is already a git local repo"
-    echo "exit"
-    exit 1
 fi
 
 
