@@ -1,0 +1,811 @@
+
+  "vim.normalModeKeyBindingsNonRecursive": [
+  {
+      "before": ["ๅ"],
+      "after": ["1"]
+  },
+  {
+      "before": ["ภ"],
+      "after": ["4"]
+  },
+  {
+      "before": ["ถ"],
+      "after": ["5"]
+  },
+  {
+      "before": ["ุ"],
+      "after": ["6"]
+  },
+  {
+      "before": ["ึ"],
+      "after": ["7"]
+  },
+  {
+      "before": ["ค"],
+      "after": ["8"]
+  },
+  {
+      "before": ["ต"],
+      "after": ["9"]
+  },
+  {
+      "before": ["จ"],
+      "after": ["0"]
+  },
+  {
+      "before": ["ข"],
+      "after": ["-"]
+  },
+  {
+      "before": ["ช"],
+      "after": ["="]
+  },
+  {
+      "before": ["%"],
+      "after": ["~"]
+  },
+  {
+      "before": ["๑"],
+      "after": ["@"]
+  },
+  {
+      "before": ["๒"],
+      "after": ["#"]
+  },
+  {
+      "before": ["๓"],
+      "after": ["$"]
+  },
+  {
+      "before": ["๔"],
+      "after": ["%"]
+  },
+  {
+      "before": ["ู"],
+      "after": ["^"]
+  },
+  {
+      "before": ["฿"],
+      "after": ["&"]
+  },
+  {
+      "before": ["๕"],
+      "after": ["*"]
+  },
+  {
+      "before": ["๖"],
+      "after": ["("]
+  },
+  {
+      "before": ["๗"],
+      "after": [")"]
+  },
+  {
+      "before": ["๘"],
+      "after": ["_"]
+  },
+  {
+      "before": ["๙"],
+      "after": ["+"]
+  },
+  {
+      "before": ["ๆ"],
+      "after": ["q"]
+  },
+  {
+      "before": ["ไ"],
+      "after": ["w"]
+  },
+  {
+      "before": ["ำ"],
+      "after": ["e"]
+  },
+  {
+      "before": ["พ"],
+      "after": ["r"]
+  },
+  {
+      "before": ["ะ"],
+      "after": ["t"]
+  },
+  {
+      "before": ["ั"],
+      "after": ["y"]
+  },
+  {
+      "before": ["ี"],
+      "after": ["u"]
+  },
+  {
+      "before": ["ร"],
+      "after": ["i"]
+  },
+  {
+      "before": ["น"],
+      "after": ["o"]
+  },
+  {
+      "before": ["ย"],
+      "after": ["p"]
+  },
+  {
+      "before": ["บ"],
+      "after": ["["]
+  },
+  {
+      "before": ["ล"],
+      "after": ["]"]
+  },
+  {
+      "before": ["ฟ"],
+      "after": ["a"]
+  },
+  {
+      "before": ["ห"],
+      "after": ["s"]
+  },
+  {
+      "before": ["ก"],
+      "after": ["d"]
+  },
+  {
+      "before": ["ด"],
+      "after": ["f"]
+  },
+  {
+      "before": ["เ"],
+      "after": ["g"]
+  },
+  {
+      "before": ["เ", "เ"],
+      "after": ["g", "g"]
+  },
+  {
+      "before": ["้"],
+      "after": ["h"]
+  },
+  {
+      "before": ["่"],
+      "after": ["j"]
+  },
+  {
+      "before": ["า"],
+      "after": ["k"]
+  },
+  {
+      "before": ["ส"],
+      "after": ["l"]
+  },
+  {
+      "before": ["ว"],
+      "after": [";"]
+  },
+  {
+      "before": ["ง"],
+      "after": ["'"]
+  },
+  {
+      "before": ["ผ"],
+      "after": ["z"]
+  },
+  {
+      "before": ["ป"],
+      "after": ["x"]
+  },
+  {
+      "before": ["แ"],
+      "after": ["c"]
+  },
+  {
+      "before": ["อ"],
+      "after": ["v"]
+  },
+  {
+      "before": ["ิ"],
+      "after": ["b"]
+  },
+  {
+      "before": ["ื"],
+      "after": ["n"]
+  },
+  {
+      "before": ["ท"],
+      "after": ["m"]
+  },
+  {
+      "before": ["ม"],
+      "after": [","]
+  },
+  {
+      "before": ["ใ"],
+      "after": ["."]
+  },
+  {
+      "before": ["ฝ"],
+      "after": ["/"]
+  },
+  {
+      "before": ["๐"],
+      "after": ["Q"]
+  },
+  {
+      "before": ["ฎ"],
+      "after": ["E"]
+  },
+  {
+      "before": ["ฑ"],
+      "after": ["R"]
+  },
+  {
+      "before": ["ธ"],
+      "after": ["T"]
+  },
+  {
+      "before": ["ํ"],
+      "after": ["Y"]
+  },
+  {
+      "before": ["๊"],
+      "after": ["U"]
+  },
+  {
+      "before": ["ณ"],
+      "after": ["I"]
+  },
+  {
+      "before": ["ฯ"],
+      "after": ["O"]
+  },
+  {
+      "before": ["ญ"],
+      "after": ["P"]
+  },
+  {
+      "before": ["ฐ"],
+      "after": ["{"]
+  },
+  {
+      "before": ["ฤ"],
+      "after": ["A"]
+  },
+  {
+      "before": ["ฆ"],
+      "after": ["S"]
+  },
+  {
+      "before": ["ฏ"],
+      "after": ["D"]
+  },
+  {
+      "before": ["โ"],
+      "after": ["F"]
+  },
+  {
+      "before": ["ฌ"],
+      "after": ["G"]
+  },
+  {
+      "before": ["็"],
+      "after": ["H"]
+  },
+  {
+      "before": ["๋"],
+      "after": ["J"]
+  },
+  {
+      "before": ["ษ"],
+      "after": ["K"]
+  },
+  {
+      "before": ["ศ"],
+      "after": ["L"]
+  },
+  {
+      "before": ["ซ"],
+      "after": [":"]
+  },
+  {
+      "before": ["ฉ"],
+      "after": ["C"]
+  },
+  {
+      "before": ["ฮ"],
+      "after": ["V"]
+  },
+  {
+      "before": ["ฺ"],
+      "after": ["B"]
+  },
+  {
+      "before": ["์"],
+      "after": ["N"]
+  },
+  {
+      "before": ["ฒ"],
+      "after": ["<"]
+  },
+  {
+      "before": ["ฬ"],
+      "after": [">"]
+  },
+  {
+      "before": ["ฦ"],
+      "after": ["?"]
+  },
+  {
+      "before": ["ผ", "ผ"],
+      "after": ["z", "z"]
+  },
+  {
+      "before": ["ผ", "ะ"],
+      "after": ["z", "t"]
+  },
+  {
+      "before": ["ผ", "ิ"],
+      "after": ["z", "b"]
+  },
+  {
+      "before": ["<c-w>", "แ"],
+      "after": ["<c-w>", "c"]
+  },
+  {
+      "before": ["<C-[>"],
+      "after": ["<Esc>"]
+  },
+  {
+      "before": ["แ", "ไ"],
+      "after": ["c", "w"]
+  },
+  {
+      "before": ["แ", "ำ"],
+      "after": ["d", "w"]
+  },
+  {
+      "before": ["ก", "ก"],
+      "after": ["d", "d"]
+  },
+  {
+      "before": ["แ", "ร"],
+      "after": ["y", "y"]
+  },
+  {
+      "before": ["แ", "พ"],
+      "after": ["p"]
+  },
+  {
+      "before": ["แ", "ย"],
+      "after": ["P"]
+  },
+  {
+      "before": ["แ", "น"],
+      "after": ["u"]
+  },
+  {
+      "before": ["แ", "ย"],
+      "after": ["<C-r>"]
+  },   
+  {
+      "before": ["อ", "ฟ", "ไ"],
+      "after": ["v", "a", "w"]
+  },
+  {
+      "before": ["อ", "ร", "ไ"],
+      "after": ["v", "i", "w"]
+  },
+  {
+      "before": ["แ", "ร", "ไ"],
+      "after": ["c", "i", "w"]
+  },
+  {
+      "before": ["แ", "ฟ", "ไ"],
+      "after": ["c", "a", "w"]
+  },
+  {
+      "before": ["แ", "ะ"],
+      "after": ["c", "t"]
+  },
+  {
+      "before": ["แ", "ร"],
+      "after": ["c", "i"]
+  },
+  {
+      "before": ["แ", "ฟ"],
+      "after": ["c", "a"]
+  },
+  {
+      "before": ["อ", "ร"],
+      "after": ["v", "i"]
+  }
+  ]
+
+  "vim.visualModeKeyBindingsNonRecursive": [
+  {
+      "before": ["ๅ"],
+      "after": ["1"]
+  },
+  {
+      "before": ["ภ"],
+      "after": ["4"]
+  },
+  {
+      "before": ["ถ"],
+      "after": ["5"]
+  },
+  {
+      "before": ["ุ"],
+      "after": ["6"]
+  },
+  {
+      "before": ["ึ"],
+      "after": ["7"]
+  },
+  {
+      "before": ["ค"],
+      "after": ["8"]
+  },
+  {
+      "before": ["ต"],
+      "after": ["9"]
+  },
+  {
+      "before": ["จ"],
+      "after": ["0"]
+  },
+  {
+      "before": ["ข"],
+      "after": ["-"]
+  },
+  {
+      "before": ["ช"],
+      "after": ["="]
+  },
+  {
+      "before": ["%"],
+      "after": ["~"]
+  },
+  {
+      "before": ["๑"],
+      "after": ["@"]
+  },
+  {
+      "before": ["๒"],
+      "after": ["#"]
+  },
+  {
+      "before": ["๓"],
+      "after": ["$"]
+  },
+  {
+      "before": ["๔"],
+      "after": ["%"]
+  },
+  {
+      "before": ["ู"],
+      "after": ["^"]
+  },
+  {
+      "before": ["฿"],
+      "after": ["&"]
+  },
+  {
+      "before": ["๕"],
+      "after": ["*"]
+  },
+  {
+      "before": ["๖"],
+      "after": ["("]
+  },
+  {
+      "before": ["๗"],
+      "after": [")"]
+  },
+  {
+      "before": ["๘"],
+      "after": ["_"]
+  },
+  {
+      "before": ["๙"],
+      "after": ["+"]
+  },
+  {
+      "before": ["ๆ"],
+      "after": ["q"]
+  },
+  {
+      "before": ["ไ"],
+      "after": ["w"]
+  },
+  {
+      "before": ["ำ"],
+      "after": ["e"]
+  },
+  {
+      "before": ["พ"],
+      "after": ["r"]
+  },
+  {
+      "before": ["ะ"],
+      "after": ["t"]
+  },
+  {
+      "before": ["ั"],
+      "after": ["y"]
+  },
+  {
+      "before": ["ี"],
+      "after": ["u"]
+  },
+  {
+      "before": ["ร"],
+      "after": ["i"]
+  },
+  {
+      "before": ["น"],
+      "after": ["o"]
+  },
+  {
+      "before": ["ย"],
+      "after": ["p"]
+  },
+  {
+      "before": ["บ"],
+      "after": ["["]
+  },
+  {
+      "before": ["ล"],
+      "after": ["]"]
+  },
+  {
+      "before": ["ฟ"],
+      "after": ["a"]
+  },
+  {
+      "before": ["ห"],
+      "after": ["s"]
+  },
+  {
+      "before": ["ก"],
+      "after": ["d"]
+  },
+  {
+      "before": ["ด"],
+      "after": ["f"]
+  },
+  {
+      "before": ["เ"],
+      "after": ["g"]
+  },
+  {
+      "before": ["เ", "เ"],
+      "after": ["g", "g"]
+  },
+  {
+      "before": ["้"],
+      "after": ["h"]
+  },
+  {
+      "before": ["่"],
+      "after": ["j"]
+  },
+  {
+      "before": ["า"],
+      "after": ["k"]
+  },
+  {
+      "before": ["ส"],
+      "after": ["l"]
+  },
+  {
+      "before": ["ว"],
+      "after": [";"]
+  },
+  {
+      "before": ["ง"],
+      "after": ["'"]
+  },
+  {
+      "before": ["ผ"],
+      "after": ["z"]
+  },
+  {
+      "before": ["ป"],
+      "after": ["x"]
+  },
+  {
+      "before": ["แ"],
+      "after": ["c"]
+  },
+  {
+      "before": ["อ"],
+      "after": ["v"]
+  },
+  {
+      "before": ["ิ"],
+      "after": ["b"]
+  },
+  {
+      "before": ["ื"],
+      "after": ["n"]
+  },
+  {
+      "before": ["ท"],
+      "after": ["m"]
+  },
+  {
+      "before": ["ม"],
+      "after": [","]
+  },
+  {
+      "before": ["ใ"],
+      "after": ["."]
+  },
+  {
+      "before": ["ฝ"],
+      "after": ["/"]
+  },
+  {
+      "before": ["๐"],
+      "after": ["Q"]
+  },
+  {
+      "before": ["ฎ"],
+      "after": ["E"]
+  },
+  {
+      "before": ["ฑ"],
+      "after": ["R"]
+  },
+  {
+      "before": ["ธ"],
+      "after": ["T"]
+  },
+  {
+      "before": ["ํ"],
+      "after": ["Y"]
+  },
+  {
+      "before": ["๊"],
+      "after": ["U"]
+  },
+  {
+      "before": ["ณ"],
+      "after": ["I"]
+  },
+  {
+      "before": ["ฯ"],
+      "after": ["O"]
+  },
+  {
+      "before": ["ญ"],
+      "after": ["P"]
+  },
+  {
+      "before": ["ฐ"],
+      "after": ["{"]
+  },
+  {
+      "before": ["ฤ"],
+      "after": ["A"]
+  },
+  {
+      "before": ["ฆ"],
+      "after": ["S"]
+  },
+  {
+      "before": ["ฏ"],
+      "after": ["D"]
+  },
+  {
+      "before": ["โ"],
+      "after": ["F"]
+  },
+  {
+      "before": ["ฌ"],
+      "after": ["G"]
+  },
+  {
+      "before": ["็"],
+      "after": ["H"]
+  },
+  {
+      "before": ["๋"],
+      "after": ["J"]
+  },
+  {
+      "before": ["ษ"],
+      "after": ["K"]
+  },
+  {
+      "before": ["ศ"],
+      "after": ["L"]
+  },
+  {
+      "before": ["ซ"],
+      "after": [":"]
+  },
+  {
+      "before": ["ฉ"],
+      "after": ["C"]
+  },
+  {
+      "before": ["ฮ"],
+      "after": ["V"]
+  },
+  {
+      "before": ["ฺ"],
+      "after": ["B"]
+  },
+  {
+      "before": ["์"],
+      "after": ["N"]
+  },
+  {
+      "before": ["ฒ"],
+      "after": ["<"]
+  },
+  {
+      "before": ["ฬ"],
+      "after": [">"]
+  },
+  {
+      "before": ["ฦ"],
+      "after": ["?"]
+  },
+  {
+      "before": ["ผ", "ผ"],
+      "after": ["z", "z"]
+  },
+  {
+      "before": ["ผ", "ะ"],
+      "after": ["z", "t"]
+  },
+  {
+      "before": ["ผ", "ิ"],
+      "after": ["z", "b"]
+  },
+  {
+      "before": ["<c-w>", "แ"],
+      "after": ["<c-w>", "c"]
+  },
+  {
+      "before": ["<C-[>"],
+      "after": ["<Esc>"]
+  },
+  {
+      "before": ["ก", "ก"],
+      "after": ["d", "d"]
+  },
+  {
+      "before": ["อ", "ฟ", "ไ"],
+      "after": ["v", "a", "w"]
+  },
+  {
+      "before": ["อ", "ร","ไ"],
+      "after": ["v", "i", "w"]
+  },
+  {
+      "before": [" ั", "ั"],
+      "after": ["y", "y"]
+  },
+  {
+      "before": ["แ", "ร", "ไ"],
+      "after": ["c", "i", "w"]
+  },
+  {
+      "before": ["ก", "ร"],
+      "after": ["d", "i"]
+  },
+  {
+      "before": ["ก", "ะ"],
+      "after": ["d", "t"]
+  },
+  {
+      "before": ["แ", "ะ"],
+      "after": ["c", "t"]
+  },
+  {
+      "before": ["แ", "ร"],
+      "after": ["c", "i"]
+  },
+  ]
+ 
