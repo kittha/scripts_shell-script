@@ -7,17 +7,18 @@ SCRIPT_NAME=$(basename "$0")
 
 echo "### nodejs express create server script for lazy guy ###"
 
-echo "Enter server port num in range 1024 to 65535"
-read PORT_NUM
+while true; do
+  echo "Enter server port num in range 1024 to 65535"
+  read PORT_NUM
 
-if [[ "$PORT_NUM" =~ ^[0-9]+$ ]] && [ "$PORT_NUM" -ge 1024 ] && [ "$PORT_NUM" -le 65535 ]
-then
-  echo "validated input: port num is $PORT_NUM"
-else
-  echo "nononono please input in range 1024 to 65535"
-  echo "exit"
-  exit 1
-fi
+  if [[ "$PORT_NUM" =~ ^[0-9]+$ ]] && [ "$PORT_NUM" -ge 1024 ] && [ "$PORT_NUM" -le 65535 ]
+  then
+    echo "validated input: port num is $PORT_NUM"
+    break
+  else
+    echo "nononono please input in range 1024 to 65535"
+  fi
+done
 
 echo "Enter your project name"
 read PROJECT_NAME
@@ -56,10 +57,11 @@ EOL
 jq '.scripts.start = "nodemon app.mjs"' package.json > tmp.$$.json && mv tmp.$$.json package.json
 
 echo "start server in port $PORT_NUM"
-gnome-terminal -- bash -c "npm run start; exec bash"
+x-terminal-emulator -e "npm run start" &
+sleep 1
 
 echo "opening in browser"
-xdg-open "http://localhost:$PORT_NUM"
+google-chrome "http://localhost:$PORT_NUM/test"
 
 # rm -- "$0"
 
