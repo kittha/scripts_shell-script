@@ -70,7 +70,7 @@ git push -u origin main
 
 
 
-echo "### script file is self-deleting ###"
-rm -- "$0"
+# echo "### script file is self-deleting ###"
+# rm -- "$0"
 
 echo "### setup complete ###"

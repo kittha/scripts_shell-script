@@ -63,14 +63,14 @@ echo "----- check if it need to delete old dir = pass -----" &&
 
 
 
-echo "----- self-delete on progress -----" &&
+# echo "----- self-delete on progress -----" &&
 
-SCRIPT_NAME="$(basename "$0")"
-TEMP_SCRIPT="/tmp/temp_script_$$.sh"
-cp "$0" "$TEMP_SCRIPT"
-chmod +x "$TEMP_SCRIPT"
-rm -- "$0"
-exec "$TEMP_SCRIPT"
-rm -- "$TEMP_SCRIPT"
+# SCRIPT_NAME="$(basename "$0")"
+# TEMP_SCRIPT="/tmp/temp_script_$$.sh"
+# cp "$0" "$TEMP_SCRIPT"
+# chmod +x "$TEMP_SCRIPT"
+# rm -- "$0"
+# exec "$TEMP_SCRIPT"
+# rm -- "$TEMP_SCRIPT"
 
 echo "***** exit script *****" 
