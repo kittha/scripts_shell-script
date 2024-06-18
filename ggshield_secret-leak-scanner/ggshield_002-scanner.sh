@@ -19,15 +19,25 @@ scan_and_notify() {
     echo "init ggshield repo scanning"
     SCRIPT_PATH=$(dirname "$(realpath "$0")")
     
-    output=$(ggshield secret scan repo "$SCRIPT_PATH" 2>&1)
+    output=$(ggshield secret scan path --exclude '**/.env' -ry "$SCRIPT_PATH" 2>&1)
     
-    echo $(date +%Y%m%d-%H%M%S) "$output" >> log_file_ggshield_scan_result.txt
-
+    
     if echo "$output" | grep -q "incident"; then
          notify-send "Incident detected" "API Key leaks was detected during the scan.\nCheck the terminal for details."
          
-    log_file_incident="incident_api_key_leak_$(date +%Y%m%d-%H%M%S).log"
-    echo "$output" > "$log_file_incident"
+         log_file_incident="incident_api_key_leak_$(date +%Y%m%d-%H%M%S).log"
+   echo $(date +%Y%m%d-%H%M%S) "Secret key leak, please check!" > "$log_file_incident"
+    
+    # start: danger zone #
+    # use for debugging only: high risk to expose api key!
+    # log_file_incident="incident_api_key_leak_$(date +%Y%m%d-%H%M%S).log"
+    # echo $(date +%Y%m%d-%H%M%S) "$output" > "$log_file_incident"
+    # end: danger zone #
+   
+      
+   
+    else if echo "$output" | grep -q "No secrets have been found"; then
+          echo $(date +%Y%m%d-%H%M%S) "No secrets have been found" >> log_file_ggshield_scan_result.txt
     fi
 }
 
