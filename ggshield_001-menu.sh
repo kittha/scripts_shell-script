@@ -9,13 +9,13 @@ read -p "Enter your choice [1-4]: " choice
 
 case $choice in
     1)
-        ./script.sh add
+        ./ggshield_002-scanner.sh add
         ;;
     2)  
-        ./script.sh scan
+        ./ggshield_002-scanner.sh scan
         ;;  
     3)
-        ./script.sh clean
+        ./ggshield_002-scanner.sh clean
         ;;
     4)
         echo "Exiting."

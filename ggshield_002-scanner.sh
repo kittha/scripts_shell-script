@@ -3,7 +3,7 @@
 echo "### adding script path to cron job ###"
 add_cron_job() {
     SCRIPT_PATH=$(realpath "$0")
-    CRON_JOB="*/30 8-17 * * * $SCRIPT_PATH"
+    CRON_JOB="*/30 6-18 * * * $SCRIPT_PATH"
     
     crontab -l | grep -q "$SCRIPT_PATH"
     if [ $? -eq 0 ]; then
@@ -20,13 +20,14 @@ scan_and_notify() {
     SCRIPT_PATH=$(dirname "$(realpath "$0")")
     
     output=$(ggshield secret scan repo "$SCRIPT_PATH" 2>&1)
-
+    
+    echo $(date +%Y%m%d-%H%M%S) "$output" >> log_file_ggshield_scan_result.txt
 
     if echo "$output" | grep -q "incident"; then
          notify-send "Incident detected" "API Key leaks was detected during the scan.\nCheck the terminal for details."
          
-    log_file="incident_api_key_leak_$(date +%Y%m%d-%H%M%S).log"
-    echo "$output" > "$log_file"
+    log_file_incident="incident_api_key_leak_$(date +%Y%m%d-%H%M%S).log"
+    echo "$output" > "$log_file_incident"
     fi
 }
 
