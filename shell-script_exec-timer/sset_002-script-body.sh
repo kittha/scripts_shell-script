@@ -16,10 +16,10 @@ add_cron_job() {
 
 
 scan_and_notify() {
-    echo "init ggshield repo scanning"
+    echo "init <task>"
     SCRIPT_PATH=$(dirname "$(realpath "$0")")
     
-    output=$(ggshield secret scan path --exclude '**/.env' -ry "$SCRIPT_PATH" 2>&1)
+    output=$(<bash command> "$SCRIPT_PATH" 2>&1)
     
     
     if echo "$output" | grep -q "incident"; then
