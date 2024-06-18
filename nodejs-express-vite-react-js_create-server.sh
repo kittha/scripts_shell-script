@@ -11,7 +11,10 @@ read PROJECTNAME
 
 mkdir $PROJECTNAME
 cd $PROJECTNAME
-mkdir server client
+echo "add node_modules and .env into .gitignore file"
+echo "node_modules" >> .gitignore
+echo ".env" >> .gitignore
+mkdir server
 git init
 cd server || exit
 
@@ -35,8 +38,9 @@ done
 npm init -y &&
 npm install express nodemon
 
-echo "add node_modules into .gitignore file"
+echo "add node_modules and .env into .gitignore file"
 echo "node_modules" >> .gitignore
+echo ".env" >> .gitignore
 
 
 
@@ -68,7 +72,7 @@ sleep 1
 
 echo "opening in browser"
 google-chrome "http://localhost:$PORT_NUM/test"
-
+cd ..
 echo "backend side setup complete"
 
 
@@ -80,7 +84,6 @@ echo "backend side setup complete"
 
 echo "start setup frontend side"
 
-cd ../client
 npm create vite@latest client -- --template react
 cd client
 
@@ -96,6 +99,7 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+.env
 dist
 dist-ssr
 *.local
@@ -119,7 +123,7 @@ x-terminal-emulator -e "npm run dev"
 sleep 1
 
 echo "opening in browser"
-google-chrome "http://localhost:3000/"
+google-chrome "http://localhost:5173/"
 
 echo "setup frontend side complete"
 
