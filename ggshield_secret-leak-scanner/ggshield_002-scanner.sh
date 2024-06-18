@@ -28,23 +28,22 @@ scan_and_notify() {
          log_file_incident="incident_api_key_leak_$(date +%Y%m%d-%H%M%S).log"
    echo $(date +%Y%m%d-%H%M%S) "Secret key leak, please check!" > "$log_file_incident"
     
-    # start: danger zone #
+    # Start: Danger zone
     # use for debugging only: high risk to expose api key!
-    # log_file_incident="incident_api_key_leak_$(date +%Y%m%d-%H%M%S).log"
-    # echo $(date +%Y%m%d-%H%M%S) "$output" > "$log_file_incident"
-    # end: danger zone #
-   
-      
+    # echo $(date +%Y%m%d-%H%M%S) "$output" > "$log_file_incident" # Don't use this in production!
+    # End: Danger zone
    
     else if echo "$output" | grep -q "No secrets have been found"; then
           echo $(date +%Y%m%d-%H%M%S) "No secrets have been found" >> log_file_ggshield_scan_result.txt
+    else
+          echo "$(date +%Y%m%d-%H%M%S) An unexpected error occurred during the scan." >> log_file_ggshield_scan_result.txt
     fi
 }
 
 
 clean_crontab() {
     echo "### Cleaning the crontab ###"
-    crontab -r
+      crontab -r
     if [ $? -eq 0 ]; then
         echo "Crontab successfully cleaned."
     else
