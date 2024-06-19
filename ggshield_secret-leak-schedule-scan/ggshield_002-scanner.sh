@@ -2,14 +2,15 @@
 
 echo "### adding script path to cron job ###"
 add_cron_job() {
+    local SCRIPT_PATH
     SCRIPT_PATH=$(realpath "$0")
     CRON_JOB="*/30 6-18 * * * $SCRIPT_PATH"
     
-    crontab -l | grep -q "$SCRIPT_PATH"
+    crontab -l 2>/dev/null | grep -q "$SCRIPT_PATH"
     if [ $? -eq 0 ]; then
         echo "Cron job already exists."
     else
-        (crontab -l; echo "$CRON_JOB") | crontab -
+        (crontab -l 2>/dev/null; echo "$CRON_JOB") | crontab -
         echo "Cron job added: $CRON_JOB"
     fi
 }
@@ -33,7 +34,7 @@ scan_and_notify() {
     # echo $(date +%Y%m%d-%H%M%S) "$output" > "$log_file_incident" # Don't use this in production!
     # End: Danger zone
    
-    else if echo "$output" | grep -q "No secrets have been found"; then
+    elif echo "$output" | grep -q "No secrets have been found"; then
           echo $(date +%Y%m%d-%H%M%S) "No secrets have been found" >> log_file_ggshield_scan_result.txt
     else
           echo "$(date +%Y%m%d-%H%M%S) An unexpected error occurred during the scan." >> log_file_ggshield_scan_result.txt
@@ -43,7 +44,7 @@ scan_and_notify() {
 
 clean_crontab() {
     echo "### Cleaning the crontab ###"
-      crontab -r
+      crontab -r 2>/dev/null
     if [ $? -eq 0 ]; then
         echo "Crontab successfully cleaned."
     else
