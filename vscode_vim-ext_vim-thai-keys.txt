@@ -416,7 +416,7 @@
       "before": ["อ", "ร"],
       "after": ["v", "i"]
   }
-  ]
+  ],
 
   "vim.visualModeKeyBindingsNonRecursive": [
   {

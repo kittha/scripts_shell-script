@@ -1,12 +1,35 @@
 #!/bin/bash
 
+
+CURRENT_DIR=$(dirname "$(realpath "$0")")
+ENV_FILE="$CURRENT_DIR/my_env.sh"
+LOG_FILE="$CURRENT_DIR/logfile.log"
+
+create_env_file() {
+    # Check if the environment file exists
+    if [ ! -f "$ENV_FILE" ]; then
+        echo "Creating environment file at $ENV_FILE"
+        cat <<EOL > "$ENV_FILE"
+# Environment variables for the ggshield scanner
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/nat/.local/bin/ggshield
+"
+export SOME_OTHER_VAR="some_value"
+EOL
+        chmod 600 "$ENV_FILE"
+    else
+        echo "Environment file already exists at $ENV_FILE"
+    fi
+}
+
+
+
 echo "### adding script path to cron job ###"
 add_cron_job() {
     local SCRIPT_PATH
     SCRIPT_PATH=$(realpath "$0")
-    CRON_JOB="*/30 6-18 * * * $SCRIPT_PATH"
+    CRON_JOB="*/30 6-18 * * * $SCRIPT_PATH scan >> $LOG_FILE 2>&1"
     
-    crontab -l 2>/dev/null | grep -q "$SCRIPT_PATH"
+    crontab -l 2>/dev/null | grep -q "$SCRIPT_PATH scan"
     if [ $? -eq 0 ]; then
         echo "Cron job already exists."
     else
@@ -19,6 +42,8 @@ add_cron_job() {
 scan_and_notify() {
     echo "init ggshield repo scanning"
     SCRIPT_PATH=$(dirname "$(realpath "$0")")
+    
+    source "$ENV_FILE"
     
     output=$(ggshield secret scan path --exclude '**/.env' -ry "$SCRIPT_PATH" 2>&1)
     
@@ -54,6 +79,8 @@ clean_crontab() {
 
 
 main() {
+    create_env_file
+
     if [ "$1" == "add" ]; then
         add_cron_job
     elif [ "$1" == "scan" ]; then

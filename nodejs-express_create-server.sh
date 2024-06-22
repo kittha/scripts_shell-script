@@ -28,10 +28,11 @@ mkdir -p ./$PROJECT_NAME/server
 cd ./$PROJECT_NAME/server || exit
 git init
 npm init -y &&
-npm install express nodemon
+npm install express nodemon dotenv
 
 echo "add node_modules into .gitignore file"
 echo "node_modules" >> .gitignore
+echo ".env" >> .gitignore
 
 echo "creating git commit object"
 git add .

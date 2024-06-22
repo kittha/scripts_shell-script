@@ -36,7 +36,7 @@ done
 
 
 npm init -y &&
-npm install express nodemon
+npm install express nodemon dotenv
 
 echo "add node_modules and .env into .gitignore file"
 echo "node_modules" >> .gitignore
