@@ -7,23 +7,12 @@ SCRIPT_NAME=$(basename "$0")
 
 echo "### nodejs express create server script for lazy guy ###"
 
-while true; do
-  echo "Enter server port num in range 1024 to 65535"
-  read PORT_NUM
-
-  if [[ "$PORT_NUM" =~ ^[0-9]+$ ]] && [ "$PORT_NUM" -ge 1024 ] && [ "$PORT_NUM" -le 65535 ]
-  then
-    echo "validated input: port num is $PORT_NUM"
-    break
-  else
-    echo "nononono please input in range 1024 to 65535"
-  fi
-done
 
 echo "Enter your project name"
 read PROJECT_NAME
 
-while true; do
+while true; 
+do
   echo "Enter backend server port num in range 1024 to 65535 (4242)"
   read PORT_NUM
 
@@ -37,11 +26,12 @@ while true; do
 done
 
 echo "creating core structure"
-mkdir -p ./$PROJECT_NAME/server
-cd ./$PROJECT_NAME/server || exit
-git init
+mkdir -p ./$PROJECT_NAME/server || { echo "Failed to create project directory."; exit 1; }
+cd ./$PROJECT_NAME/server || { echo "Failed to enter project directory."; exit 1; }
+git init || { echo "Failed to initialize Git repository."; exit 1; }
 npm init -y &&
-npm install express nodemon dotenv
+npm install express nodemon dotenv || { echo "Failed to initialize npm and install dependencies."; exit 1; }
+
 
 echo "add node_modules into .gitignore file"
 echo "node_modules" >> .gitignore
@@ -49,19 +39,19 @@ echo ".env" >> .gitignore
 
 echo "creating git commit object"
 git add .
-git commit -m "init commit"
+git commit -m "Initial commit" || { echo "Failed to create initial commit."; exit 1; }
 
 
 echo "creat app.mjs with init express setup"
-cat <<EOL > app.mjs
+cat << 'EOL' > app.mjs
 
 import express from "express";
-//import connectionPool from "./utils/db.mjs";
-//import { validateCreatePostData } from "./middlewares/post.validation.mjs"
-//don't forget to insert middleware into 2nd args of .post fn
+// import connectionPool from "./utils/db.mjs";
+import { validateCreatePostData } from "./middlewares/post.validation.mjs"
+// edit here
 
 const app = express();
-const port = $PORT_NUM;
+const port = process.env.PORT || 4000;
 
 app.use(express.json());
 
@@ -70,7 +60,7 @@ app.get("/test", (req, res) => {
 });
 
 // CREATE
-app.post("/posts", async (req, res) => {
+app.post("/posts", validateCreatePostData, async (req, res) => {
   try {
     const { title, content, category, length, status } = req.body;
     const newPost = {
@@ -81,7 +71,7 @@ app.post("/posts", async (req, res) => {
       status,
       created_at: new Date(),
       updated_at: new Date(),
-      published_at: new Date(),
+      published_at: new Date()
     };
 
     await connectionPool.query(
@@ -96,17 +86,17 @@ app.post("/posts", async (req, res) => {
         newPost.created_at,
         newPost.updated_at,
         newPost.published_at,
-        newPost.status,
+        newPost.status
       ]
     );
 
     return res.status(201).json({
-      message: "Created post successfully",
+      message: "Created post successfully"
     });
   } catch (error) {
     console.error("Error creating post:", error);
     return res.status(500).json({
-      message: "Server could not create post because of a database issue",
+      message: "Server could not create post because of a database issue"
     });
   }
 });
@@ -123,7 +113,7 @@ app.get("/posts/:postId", async (req, res) => {
 
     if (!results.rows[0]) {
       return res.status(404).json({
-        message: `Server could not find a requested post (post id: ${postIdFromClient})`,
+        message: `Server could not find a requested post (post id: ${postIdFromClient})`
       });
     }
 
@@ -133,7 +123,37 @@ app.get("/posts/:postId", async (req, res) => {
   } catch (error) {
     console.error("Error fetching post:", error);
     return res.status(500).json({
-      message: "Server could not fetch the post due to a database issue",
+      message: "Server could not fetch the post due to a database issue"
+    });
+  }
+});
+
+app.get("/posts", async (req, res) => {
+  const title = req.query.title ? `%${req.query.title}%` : null;
+
+  const category = req.query.category ? `%${req.query.category}%` : null;
+
+  try {
+    const result = await connectionPool.query(
+      ` 
+    SELECT * FROM posts WHERE (title ILIKE $1 OR $1 IS NULL) AND (category ILIKE $2 OR $2 IS NULL) 
+    `,
+      [title, category]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({
+        message: `no posts found)`
+      });
+    }
+
+    return res.json({
+      data: result.rows,
+    });
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    return res.status(500).json({
+      message: "Server could not fetch the posts due to a database issue"
     });
   }
 });
@@ -149,7 +169,7 @@ app.put("/posts/:postId", async (req, res) => {
       category,
       length,
       status,
-      updated_at: new Date(),
+      updated_at: new Date()
     };
 
     await connectionPool.query(
@@ -170,17 +190,17 @@ app.put("/posts/:postId", async (req, res) => {
         updatedPost.category,
         updatedPost.length,
         updatedPost.status,
-        updatedPost.updated_at,
+        updatedPost.updated_at
       ]
     );
 
     return res.status(200).json({
-      message: "Updated post successfully",
+      message: "Updated post successfully"
     });
   } catch (error) {
     console.error("Error updating post:", error);
     return res.status(500).json({
-      message: "Server could not update the post due to a database issue",
+      message: "Server could not update the post due to a database issue"
     });
   }
 });
@@ -200,17 +220,17 @@ app.delete("/posts/:postId", async (req, res) => {
 
     if (result.rowCount === 0) {
       return res.status(404).json({
-        message: `Server could not find a requested post (post id: ${postIdFromClient})`,
+        message: `Server could not find a requested post (post id: ${postIdFromClient})`
       });
     }
 
     return res.status(200).json({
-      message: "Deleted post successfully",
+      message: "Deleted post successfully"
     });
   } catch (error) {
     console.error("Error deleting post:", error);
     return res.status(500).json({
-      message: "Server could not delete the post due to a database issue",
+      message: "Server could not delete the post due to a database issue"
     });
   }
 });
@@ -219,13 +239,14 @@ app.listen(port, () => {
   console.log(`Server is running at ${port}`);
 });
 
+
 EOL
 
 jq '.scripts.start = "nodemon app.mjs"' package.json > tmp.$$.json && mv tmp.$$.json package.json
 
 echo "start server in port $PORT_NUM"
 x-terminal-emulator -e "npm run start" &
-sleep 1
+sleep 2
 
 #echo "opening in browser"
 #google-chrome "http://localhost:$PORT_NUM/test"

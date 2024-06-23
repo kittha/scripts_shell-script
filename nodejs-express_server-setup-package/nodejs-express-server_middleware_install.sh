@@ -62,7 +62,7 @@ export const validateCreatePostData = (req, res, next) => {
   }
 };
 
-# EOF
+EOL
 
 echo "Script execution completed successfully."
 

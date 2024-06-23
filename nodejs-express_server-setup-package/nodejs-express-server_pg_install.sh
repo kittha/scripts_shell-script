@@ -10,6 +10,8 @@ fi
 UTILS_DIR="$SERVER_DIR/utils"
 mkdir -p "$UTILS_DIR"
 
+npm install dotenv pg
+
 DB_FILE="$UTILS_DIR/db.mjs"
 touch "$DB_FILE"
 
@@ -23,7 +25,7 @@ const connectionPool = new Pool({
   user: "",
   host: "",
   database: "",
-  password: `${process.env.DB_PASSWORD}`,
+  password: \`\${process.env.DB_PASSWORD}\`,
   port: 5432,
 });
 
