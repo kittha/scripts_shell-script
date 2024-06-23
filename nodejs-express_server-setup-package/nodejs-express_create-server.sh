@@ -23,6 +23,19 @@ done
 echo "Enter your project name"
 read PROJECT_NAME
 
+while true; do
+  echo "Enter backend server port num in range 1024 to 65535 (4242)"
+  read PORT_NUM
+
+  if [[ "$PORT_NUM" =~ ^[0-9]+$ ]] && [ "$PORT_NUM" -ge 1024 ] && [ "$PORT_NUM" -le 65535 ]
+  then
+    echo "validated input: port num is $PORT_NUM"
+    break
+  else
+    echo "nononono please input in range 1024 to 65535"
+  fi
+done
+
 echo "creating core structure"
 mkdir -p ./$PROJECT_NAME/server
 cd ./$PROJECT_NAME/server || exit
@@ -41,18 +54,171 @@ git commit -m "init commit"
 
 echo "creat app.mjs with init express setup"
 cat <<EOL > app.mjs
+
 import express from "express";
+//import connectionPool from "./utils/db.mjs";
+//import { validateCreatePostData } from "./middlewares/post.validation.mjs"
+//don't forget to insert middleware into 2nd args of .post fn
 
 const app = express();
 const port = $PORT_NUM;
+
+app.use(express.json());
 
 app.get("/test", (req, res) => {
   return res.json("Server API is working");
 });
 
-app.listen(port, () => {
-  console.log(\`Server is running at \${port}\`);
+// CREATE
+app.post("/posts", async (req, res) => {
+  try {
+    const { title, content, category, length, status } = req.body;
+    const newPost = {
+      title,
+      content,
+      category,
+      length,
+      status,
+      created_at: new Date(),
+      updated_at: new Date(),
+      published_at: new Date(),
+    };
+
+    await connectionPool.query(
+      `INSERT INTO posts (user_id, title, content, category, length, created_at, updated_at, published_at, status)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`,
+      [
+        1,
+        newPost.title,
+        newPost.content,
+        newPost.category,
+        newPost.length,
+        newPost.created_at,
+        newPost.updated_at,
+        newPost.published_at,
+        newPost.status,
+      ]
+    );
+
+    return res.status(201).json({
+      message: "Created post successfully",
+    });
+  } catch (error) {
+    console.error("Error creating post:", error);
+    return res.status(500).json({
+      message: "Server could not create post because of a database issue",
+    });
+  }
 });
+
+// READ
+app.get("/posts/:postId", async (req, res) => {
+  const postIdFromClient = req.params.postId;
+
+  try {
+    const results = await connectionPool.query(
+      `SELECT * FROM posts WHERE post_id=$1`,
+      [postIdFromClient]
+    );
+
+    if (!results.rows[0]) {
+      return res.status(404).json({
+        message: `Server could not find a requested post (post id: ${postIdFromClient})`,
+      });
+    }
+
+    return res.status(200).json({
+      data: results.rows[0],
+    });
+  } catch (error) {
+    console.error("Error fetching post:", error);
+    return res.status(500).json({
+      message: "Server could not fetch the post due to a database issue",
+    });
+  }
+});
+
+// UPDATE
+app.put("/posts/:postId", async (req, res) => {
+  try {
+    const postIdFromClient = req.params.postId;
+    const { title, content, category, length, status } = req.body;
+    const updatedPost = {
+      title,
+      content,
+      category,
+      length,
+      status,
+      updated_at: new Date(),
+    };
+
+    await connectionPool.query(
+      `
+      UPDATE posts
+      SET title = $2,
+          content = $3,
+          category = $4,
+          length = $5,
+          status = $6,
+          updated_at = $7
+      WHERE post_id = $1
+      `,
+      [
+        postIdFromClient,
+        updatedPost.title,
+        updatedPost.content,
+        updatedPost.category,
+        updatedPost.length,
+        updatedPost.status,
+        updatedPost.updated_at,
+      ]
+    );
+
+    return res.status(200).json({
+      message: "Updated post successfully",
+    });
+  } catch (error) {
+    console.error("Error updating post:", error);
+    return res.status(500).json({
+      message: "Server could not update the post due to a database issue",
+    });
+  }
+});
+
+// DELETE
+app.delete("/posts/:postId", async (req, res) => {
+  try {
+    const postIdFromClient = req.params.postId;
+
+    const result = await connectionPool.query(
+      `
+        DELETE FROM posts
+        WHERE post_id = $1
+        `,
+      [postIdFromClient]
+    );
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({
+        message: `Server could not find a requested post (post id: ${postIdFromClient})`,
+      });
+    }
+
+    return res.status(200).json({
+      message: "Deleted post successfully",
+    });
+  } catch (error) {
+    console.error("Error deleting post:", error);
+    return res.status(500).json({
+      message: "Server could not delete the post due to a database issue",
+    });
+  }
+});
+
+app.listen(port, () => {
+  console.log(`Server is running at ${port}`);
+});
+
 EOL
 
 jq '.scripts.start = "nodemon app.mjs"' package.json > tmp.$$.json && mv tmp.$$.json package.json

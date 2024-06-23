@@ -15,6 +15,7 @@ touch "$DB_FILE"
 
 cat <<EOL > "$DB_FILE"
 import pg from "pg";
+import "dotenv/config";
 
 const { Pool } = pg.default;
 
