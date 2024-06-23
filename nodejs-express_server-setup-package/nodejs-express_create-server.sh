@@ -61,9 +61,9 @@ echo "start server in port $PORT_NUM"
 x-terminal-emulator -e "npm run start" &
 sleep 1
 
-echo "opening in browser"
-google-chrome "http://localhost:$PORT_NUM/test"
+#echo "opening in browser"
+#google-chrome "http://localhost:$PORT_NUM/test"
 
-# rm -- "$0"
+#rm -- "$0"
 
 echo "setup complete"
