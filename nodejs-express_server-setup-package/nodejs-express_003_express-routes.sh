@@ -1,66 +1,41 @@
 #!/bin/bash
 
-# create server & local repo only
-# if you want to upload into GitHub remote repo, please use another script
-
 SCRIPT_NAME=$(basename "$0")
 
-echo "### nodejs express create server script for lazy guy ###"
 
 
-echo "Enter your project name"
-read PROJECT_NAME
+PROJECT_NAME="$1"
+PORT_NUM="$2"
 
-while true; 
-do
-  echo "Enter backend server port num in range 1024 to 65535 (4242)"
-  read PORT_NUM
+if [ -z "$PROJECT_NAME" ] || [ -z "$PORT_NUM" ]; then
+  echo "Error: Project name or port number not provided."
+  exit 1
+fi
 
-  if [[ "$PORT_NUM" =~ ^[0-9]+$ ]] && [ "$PORT_NUM" -ge 1024 ] && [ "$PORT_NUM" -le 65535 ]
-  then
-    echo "validated input: port num is $PORT_NUM"
-    break
-  else
-    echo "nononono please input in range 1024 to 65535"
-  fi
-done
+SERVER_DIR="./$PROJECT_NAME/server"
+ROUTES_DIR="$SERVER_DIR/routes"
 
-echo "creating core structure"
-mkdir -p ./$PROJECT_NAME/server || { echo "Failed to create project directory."; exit 1; }
-cd ./$PROJECT_NAME/server || { echo "Failed to enter project directory."; exit 1; }
-git init || { echo "Failed to initialize Git repository."; exit 1; }
-npm init -y &&
-npm install express nodemon dotenv || { echo "Failed to initialize npm and install dependencies."; exit 1; }
+if [ ! -d "$SERVER_DIR" ]; then
+  echo "Error: Server directory not found. Make sure to run Script Two first."
+  exit 1
+fi
 
+mkdir -p "$ROUTES_DIR"
 
-echo "add node_modules into .gitignore file"
-echo "node_modules" >> .gitignore
-echo ".env" >> .gitignore
+touch "$ROUTES_DIR/post.mjs"
 
-echo "creating git commit object"
-git add .
-git commit -m "Initial commit" || { echo "Failed to create initial commit."; exit 1; }
+cat << 'EOL' > "$ROUTES_DIR/post.mjs"
+
+import { Router } from "express";
+import { validateCreatePostData } from "../middlewares/post.validation.mjs"
+// import connectionPool from "../utils/db.mjs";
+
+const postRouter = Router();
 
 
-echo "creat app.mjs with init express setup"
-cat << 'EOL' > app.mjs
-
-import express from "express";
-// import connectionPool from "./utils/db.mjs";
-import { validateCreatePostData } from "./middlewares/post.validation.mjs"
-// edit here
-
-const app = express();
-const port = process.env.PORT || 4000;
-
-app.use(express.json());
-
-app.get("/test", (req, res) => {
-  return res.json("Server API is working");
-});
 
 // CREATE
-app.post("/posts", validateCreatePostData, async (req, res) => {
+postRouter.post("/", [validateCreatePostData], async (req, res) => {
   try {
     const { title, content, category, length, status } = req.body;
     const newPost = {
@@ -102,7 +77,7 @@ app.post("/posts", validateCreatePostData, async (req, res) => {
 });
 
 // READ
-app.get("/posts/:postId", async (req, res) => {
+postRouter.get("/:postId", async (req, res) => {
   const postIdFromClient = req.params.postId;
 
   try {
@@ -128,7 +103,7 @@ app.get("/posts/:postId", async (req, res) => {
   }
 });
 
-app.get("/posts", async (req, res) => {
+postRouter.get("/", async (req, res) => {
   const title = req.query.title ? `%${req.query.title}%` : null;
 
   const category = req.query.category ? `%${req.query.category}%` : null;
@@ -159,7 +134,7 @@ app.get("/posts", async (req, res) => {
 });
 
 // UPDATE
-app.put("/posts/:postId", async (req, res) => {
+postRouter.put("/:postId", async (req, res) => {
   try {
     const postIdFromClient = req.params.postId;
     const { title, content, category, length, status } = req.body;
@@ -206,7 +181,7 @@ app.put("/posts/:postId", async (req, res) => {
 });
 
 // DELETE
-app.delete("/posts/:postId", async (req, res) => {
+postRouter.delete("/:postId", async (req, res) => {
   try {
     const postIdFromClient = req.params.postId;
 
@@ -235,22 +210,25 @@ app.delete("/posts/:postId", async (req, res) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(`Server is running at ${port}`);
-});
+
+
+
+export default postRouter
+
+
+
+
+
+
+
+
+
+
+
 
 
 EOL
 
-jq '.scripts.start = "nodemon app.mjs"' package.json > tmp.$$.json && mv tmp.$$.json package.json
-
-echo "start server in port $PORT_NUM"
-x-terminal-emulator -e "npm run start" &
-sleep 2
-
-#echo "opening in browser"
-#google-chrome "http://localhost:$PORT_NUM/test"
+echo "Script execution completed successfully."
 
 #rm -- "$0"
-
-echo "setup complete"

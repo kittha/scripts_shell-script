@@ -1,18 +1,33 @@
 #!/bin/bash
 
-SERVER_DIR=$(find . -type d -name "server" 2>/dev/null)
+SCRIPT_NAME=$(basename "$0")
 
-if [ -z "$SERVER_DIR" ]; then
-    echo "No folder named 'server' found."
-    exit 1
+
+PROJECT_NAME="$1"
+PORT_NUM="$2"
+
+if [ -z "$PROJECT_NAME" ] || [ -z "$PORT_NUM" ]; then
+  echo "Error: Project name or port number not provided."
+  exit 1
 fi
 
+SERVER_DIR="./$PROJECT_NAME/server"
 MIDDLEWARES_DIR="$SERVER_DIR/middlewares"
-mkdir -p "$MIDDLEWARES_DIR"
 
-touch "$MIDDLEWARES_DIR/post.validation.mjs"
+if [ ! -d "$SERVER_DIR" ]; then
+  echo "Error: Server directory not found. Make sure to run Script Two first."
+  exit 1
+fi
+
+
+mkdir -p "$MIDDLEWARES_DIR" || { echo "Failed to create middlewares directory."; exit 1; }
+
+touch "$MIDDLEWARES_DIR/post.validation.mjs" || { echo "Failed to create post.validation.mjs file."; exit 1; }
+
 
 cat <<EOL > "$MIDDLEWARES_DIR/post.validation.mjs"
+
+
 export const validateCreatePostData = (req, res, next) => {
   try {
     if (!req.body.title) {
