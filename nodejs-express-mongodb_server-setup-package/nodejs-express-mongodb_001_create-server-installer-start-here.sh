@@ -26,6 +26,6 @@ echo "Running script 1 2 3 4 5 ..."
 
 ./nodejs-express_004_middleware_install.sh "$PROJECT_NAME" "$PORT_NUM"
 
-./nodejs-express_005_pg_install.sh "$PROJECT_NAME" "$PORT_NUM"
+./nodejs-express_006_mongodb_install.sh "$PROJECT_NAME" "$PORT_NUM"
 
 #rm -- "$0"

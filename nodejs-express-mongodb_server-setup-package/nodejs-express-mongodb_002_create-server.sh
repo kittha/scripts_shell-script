@@ -19,7 +19,7 @@ cd ./$PROJECT_NAME/server || { echo "Failed to enter project directory."; exit 1
 git init || { echo "Failed to initialize Git repository."; exit 1; }
 npm init -y &&
 npm install --save dotenv express nodemon pg || { echo "Failed to initialize npm and install dependencies."; exit 1; }
-
+#npm install --save dotenv express mongodb nodemon || { echo "Failed to initialize npm and install dependencies."; exit 1; }
 
 echo "add node_modules into .gitignore file"
 echo "node_modules" >> .gitignore
@@ -31,27 +31,39 @@ git commit -m "Initial commit" || { echo "Failed to create initial commit."; exi
 
 
 echo "creat app.mjs with init express setup"
-cat << 'EOL' > app.mjs
+cat << EOL > app.mjs
 
 import express from "express";
 import { Router } from "express";
-import postRouter from "./routes/post.mjs";
+import movieRouter from "./apps/movies.js";
 // TODO: unlock import connectionPool in files at routes folder
+import { client } from "./utils/db.js"
 
-const app = express();
-const port = process.env.PORT || 4000;
+async function init() {
+  const app = express();
+  const port = \${process.env.PORT} || 4000;
+  
+  await client.connect();
+  
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: true }));
+  
+  app.use("/movies", movieRouter);
 
-app.use(express.json());
-app.use("/post", postRouter);
+  app.get("/test", (req, res) => {
+    return res.json("Server API is working");
+  });
+  
+  app.get("*", (req, res) => {
+    res.status(404).send("Not found");
+  }
 
-app.get("/test", (req, res) => {
-  return res.json("Server API is working");
-});
+  app.listen(port, () => {
+    console.log(\`Server is running at \${port}\`);
+  });
+}
 
-app.listen(port, () => {
-  console.log(`Server is running at ${port}`);
-});
-
+init();
 
 EOL
 
