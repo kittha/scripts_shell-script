@@ -33,6 +33,7 @@ export const client = new MongoClient(connectionString, {
 });
 
 export const db = client.db("");
+// edit here
 EOL
 
 echo "Script execution completed successfully."
