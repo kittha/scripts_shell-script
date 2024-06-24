@@ -20,12 +20,12 @@ do
 done
 
 echo "Running script 1 2 3 4 5 ..."
-./nodejs-express_002_create-server.sh "$PROJECT_NAME" "$PORT_NUM"
+./nodejs-express-mongodb_002_create-server.sh "$PROJECT_NAME" "$PORT_NUM"
 
-./nodejs-express_003_express-routes.sh "$PROJECT_NAME" "$PORT_NUM"
+./nodejs-express-mongodb_003_express-routes.sh "$PROJECT_NAME" "$PORT_NUM"
 
-./nodejs-express_004_middleware_install.sh "$PROJECT_NAME" "$PORT_NUM"
+./nodejs-express-mongodb_004_middleware_install.sh "$PROJECT_NAME" "$PORT_NUM"
 
-./nodejs-express_006_mongodb_install.sh "$PROJECT_NAME" "$PORT_NUM"
+./nodejs-express-mongodb_006_mongodb_install.sh "$PROJECT_NAME" "$PORT_NUM"
 
 #rm -- "$0"

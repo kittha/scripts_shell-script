@@ -20,13 +20,13 @@ do
 done
 
 echo "Running script 1 2 3 4 5 ..."
-./nodejs-express_002_create-server.sh "$PROJECT_NAME" "$PORT_NUM"
+./nodejs-express-pg_002_create-server.sh "$PROJECT_NAME" "$PORT_NUM"
 
-./nodejs-express_003_express-routes.sh "$PROJECT_NAME" "$PORT_NUM"
+./nodejs-express-pg_003_express-routes.sh "$PROJECT_NAME" "$PORT_NUM"
 
-./nodejs-express_004_middleware_install.sh "$PROJECT_NAME" "$PORT_NUM"
+./nodejs-express-pg_004_middleware_install.sh "$PROJECT_NAME" "$PORT_NUM"
 
-./nodejs-express_005_pg_install.sh "$PROJECT_NAME" "$PORT_NUM"
+./nodejs-express-pg_005_pg_install.sh "$PROJECT_NAME" "$PORT_NUM"
 
 
 #rm -- "$0"
