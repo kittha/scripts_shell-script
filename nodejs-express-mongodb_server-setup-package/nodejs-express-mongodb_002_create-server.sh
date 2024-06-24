@@ -16,6 +16,9 @@ PORT_NUM="$2"
 echo "creating core structure"
 mkdir -p ./$PROJECT_NAME/server || { echo "Failed to create project directory."; exit 1; }
 cd ./$PROJECT_NAME/server || { echo "Failed to enter project directory."; exit 1; }
+echo 'DB_PASSWORD=""' >> .env
+echo "PORT=\"$PORT_NUM\"" >> .env
+
 git init || { echo "Failed to initialize Git repository."; exit 1; }
 npm init -y &&
 npm install --save dotenv express nodemon pg || { echo "Failed to initialize npm and install dependencies."; exit 1; }

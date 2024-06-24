@@ -27,6 +27,7 @@ cat <<EOL > "$UTILS_DIR/db.js"
 import { MongoClient } from "mongodb"
 
 const connectionString = "mongodb://127.0.0.1:27017";
+//const connectionString = "mongodb://myUsername:\${process.env.DB_PASSWORD}@127.0.0.1:27017/myDatabase";
 
 export const client = new MongoClient(connectionString, {
   useUnifiedTopology: true,
