@@ -29,7 +29,7 @@ cat <<EOL > "$MIDDLEWARES_DIR/post.validation.mjs"
 
 
 export const validateCreatePostData = (req, res, next) => {
-  try {
+
     if (!req.body.title) {
       return res.status(401).json({
         message: "กรุณาส่งข้อมูล Title ของโพสต์เข้ามาด้วย"
@@ -68,7 +68,7 @@ export const validateCreatePostData = (req, res, next) => {
         message: "กรุณาส่งข้อมูล Content ของโพสต์ตามที่กำหนดไม่เกิน 100 ตัวอักษร"
       });
     }
-
+try {
     next();
 
   } catch (error) {

@@ -38,6 +38,14 @@ const postRouter = Router();
 postRouter.post("/", [validateCreatePostData], async (req, res) => {
   try {
     const { title, content, category, length, status } = req.body;
+    
+    if (!title || !content || !category) {
+      return res.status(400).json({
+        message:
+          "Server could not create assignment because there are missing data from client",
+      });
+    }
+    
     const newPost = {
       title,
       content,
@@ -138,6 +146,14 @@ postRouter.put("/:postId", async (req, res) => {
   try {
     const postIdFromClient = req.params.postId;
     const { title, content, category, length, status } = req.body;
+    
+        if (!title || !content || !category) {
+      return res.status(400).json({
+        message:
+          "Server could not create assignment because there are missing data from client",
+      });
+    }
+    
     const updatedPost = {
       title,
       content,
