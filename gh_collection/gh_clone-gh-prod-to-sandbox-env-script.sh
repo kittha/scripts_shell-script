@@ -3,7 +3,7 @@
 
 
 #ENTER template REMOTE REPO LINK
-template_link="https://github.com/kittha/kittha"
+template_link="git@github.com:kittha/kittha.git"
 
 #ENTER template DIR NAME
 #template dir name
